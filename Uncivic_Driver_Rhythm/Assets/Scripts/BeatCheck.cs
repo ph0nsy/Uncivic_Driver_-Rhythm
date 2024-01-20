@@ -6,16 +6,16 @@ public class BeatCheck : MonoBehaviour
 {
 
     // Active frame constants
-    int CHECK_FRAMES = 15;
-    int GOOD_FRAMES = 10;
-    int EXCELLENT_FRAMES = 4;
-    int CHECK_BAD_FRAMES;
-    int CHECK_GOOD_FRAMES;
+    public int CHECK_FRAMES = 15;
+    public int GOOD_FRAMES = 10;
+    public int EXCELLENT_FRAMES = 4;
+    public int CHECK_BAD_FRAMES;
+    public int CHECK_GOOD_FRAMES;
 
 
-    int framecount;
-    bool checking = false;
-    bool isFlip = false;
+    public int framecount;
+    public bool checking = false;
+    public bool isFlip = false;
     int points;
 
 
@@ -39,17 +39,27 @@ public class BeatCheck : MonoBehaviour
         if(this.checking){
 
             if(input!=0 && isCorrectAction(input)){
+                this.checking=false;
                 this.points = checkFrame(framecount);
+                
             }
             if(framecount >= CHECK_FRAMES){
                 this.checking=false;
                 this.points=-1;
+                Debug.Log("TOO LATE");
             }
+            if(!isCorrectAction(input)){
+                this.checking=false;
+                this.points=-1;
+                Debug.Log("FUCKED UP");
+            }
+
             ++framecount;
         }
     }
 
     
+
     bool isCorrectAction(float input){
         return (input < 0 && isFlip) || (input > 0 && !isFlip) || input == 0;
     }
@@ -63,14 +73,18 @@ public class BeatCheck : MonoBehaviour
             // EXCELLENT BEAT! frame en window de 4 frames
             if (frameWithInput  > CHECK_BAD_FRAMES + CHECK_GOOD_FRAMES
                 && frameWithInput <= CHECK_BAD_FRAMES + CHECK_GOOD_FRAMES + EXCELLENT_FRAMES){
+                    
+                    Debug.Log("EXCELLENT");
                     return 100;
             }
 
             // else...
+            Debug.Log("Good!");
             return 10;
         }
 
         //si lo haces muy pronto o te lo saltas, pierdes un punto
+        Debug.Log("IDIOT");
         return -1;
 
     }

@@ -23,8 +23,8 @@ public class Movimiento : MonoBehaviour
     {   
         //X^2+y^2=R
         int R = 5;
-        t+=1*Time.deltaTime;
-        mov = Vector3.left *2* R*Mathf.Cos(3*t) +  Vector3.up * R*Mathf.Sin(t) + Vector3.forward * R*Mathf.Sin(t);
+        t+=2*Time.deltaTime;
+        mov = Vector3.left *2*R*Mathf.Sin(t)-Vector3.up *R*Mathf.Cos(2*t);
 
         this.transform.position=mov;
     }
