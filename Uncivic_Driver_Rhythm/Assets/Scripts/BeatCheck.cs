@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BeatCheck : MonoBehaviour
 {
@@ -16,8 +18,10 @@ public class BeatCheck : MonoBehaviour
     public int framecount;
     public bool checking = false;
     public bool isFlip = false;
-    int points;
+    public int points;
 
+    public GameObject finalScore;
+    public GameObject textScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,7 @@ public class BeatCheck : MonoBehaviour
         this.framecount=0;
         this.checking=false;
         this.points=0;
+        textScreen = finalScore.transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
@@ -56,6 +61,7 @@ public class BeatCheck : MonoBehaviour
 
             ++framecount;
         }
+        textScreen.GetComponent<Text>().text= "Score: " + this.points;
     }
 
     
