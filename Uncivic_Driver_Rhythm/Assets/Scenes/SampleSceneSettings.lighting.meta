@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Uncivic_Driver_Rhythm/Assets/Scenes/SampleSceneSettings.lighting.meta
 guid: 4e022b10cbe7ab64eac818b537bbd4ff
+=======
+guid: 43ac459af6274ba4cad306e6707eef8f
+>>>>>>> ccd6cca6226d2726f54cadd5426012d5bae9ab36:Uncivic_Driver_Rhythm/Assets/Scripts/Materials/virtual insnity.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

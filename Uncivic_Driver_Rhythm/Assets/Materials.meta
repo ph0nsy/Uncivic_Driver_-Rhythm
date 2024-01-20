@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Uncivic_Driver_Rhythm/Assets/Materials.meta
 guid: 5484306db87412a4ca3c8fb23adeb7a9
+=======
+guid: 49280813db162d4449816a875b501a21
+>>>>>>> ccd6cca6226d2726f54cadd5426012d5bae9ab36:Uncivic_Driver_Rhythm/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
