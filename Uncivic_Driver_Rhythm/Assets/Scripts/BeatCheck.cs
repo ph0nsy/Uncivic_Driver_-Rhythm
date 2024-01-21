@@ -23,21 +23,26 @@ public class BeatCheck : MonoBehaviour
     public GameObject finalScore;
     public GameObject textScreen;
 
+    private Transform hit_block=null;
+
     // Start is called before the first frame update
     void Start()
     {  
+        Application.targetFrameRate=60;
         this.CHECK_BAD_FRAMES = CHECK_FRAMES-GOOD_FRAMES;
         this.CHECK_GOOD_FRAMES = (GOOD_FRAMES-EXCELLENT_FRAMES)/2;
         this.framecount=0;
         this.checking=false;
         this.points=0;
-        textScreen = finalScore.transform.GetChild(2).gameObject;
+        //textScreen = finalScore.transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         
+        raycast();
+
         //0 es nada, 1 es dcha y -1 izq
         float input = Input.GetAxis("Horizontal");
 
@@ -61,9 +66,34 @@ public class BeatCheck : MonoBehaviour
 
             ++framecount;
         }
-        textScreen.GetComponent<Text>().text= "Score: " + this.points;
+        // textScreen.GetComponent<Text>().text= "Score: " + this.points;
+        
     }
 
+
+    void raycast() {
+         // Bit shift the index of the layer (8) to get a bit mask
+        int layerMask = 1<<8;
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, Mathf.Infinity, layerMask))
+        {
+                if(hit_block==null || hit_block==hit.transform){
+                    hit_block = hit.transform;       
+                    Debug.Log("---------------------------------------------------------------");
+                    this.checking=true;
+                    this.framecount=0;
+                }
+
+                if(hit_block!=hit.transform){
+                    Debug.Log(this.framecount);
+                    this.checking=false;
+                    this.framecount=0;
+                }
+            
+        }
+    }
     
 
     bool isCorrectAction(float input){
