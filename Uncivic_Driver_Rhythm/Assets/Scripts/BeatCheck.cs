@@ -81,13 +81,13 @@ public class BeatCheck : MonoBehaviour
         {
                 if(hit_block==null || hit_block==hit.transform){
                     hit_block = hit.transform;       
-                    Debug.Log("---------------------------------------------------------------");
+                    // Debug.Log("---------------------------------------------------------------");
                     this.checking=true;
                     this.framecount=0;
                 }
 
                 if(hit_block!=hit.transform){
-                    Debug.Log(this.framecount);
+                    // Debug.Log(this.framecount);
                     this.checking=false;
                     this.framecount=0;
                 }
@@ -96,7 +96,7 @@ public class BeatCheck : MonoBehaviour
     }
     
 
-    bool isCorrectAction(float input){
+    public bool isCorrectAction(float input){
         return (input < 0 && isFlip) || (input > 0 && !isFlip) || input == 0;
     }
 
