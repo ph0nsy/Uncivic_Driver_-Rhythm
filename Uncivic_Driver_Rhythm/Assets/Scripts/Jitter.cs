@@ -21,9 +21,12 @@ public class Jitter : MonoBehaviour
     void FixedUpdate()
     {
         timestep+=Time.deltaTime*frequency; 
-        position = leftRightJitter ? 
-            Vector3.left *(despVertical+ (jitterAmount*Mathf.Cos(timestep))): 
-            Vector3.up *(despVertical+ (jitterAmount*Mathf.Cos(timestep)));
-        this.transform.position=position;
+        if(leftRightJitter) {
+            this.transform.position= new Vector3 ((despVertical+ (jitterAmount*Mathf.Cos(timestep))), this.transform.position.y, this.transform.position.z);
+        }
+        else { 
+            this.transform.position= new Vector3 ( this.transform.position.x, (despVertical+ (jitterAmount*Mathf.Cos(timestep))), this.transform.position.z);
+        }
+       
     }
 }
