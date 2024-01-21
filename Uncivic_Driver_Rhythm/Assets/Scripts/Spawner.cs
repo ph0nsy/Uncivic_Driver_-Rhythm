@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -20,13 +21,19 @@ public class Spawner : MonoBehaviour
 
     }
 
+    void OnEnable(){
+        carsPerSong = new List<Tuple<string, int>>();
+        textToMap(textContent);
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {   
-        if(carsPerSong.Count > 0){
+        if(carsPerSong.Any()){
             if(fpsCounter == 0){
-                if(carsPerSong[0].Item1 == "cop") Instantiate(car, new Vector3(-5f,-5f,50f), new Quaternion(120f,180f,-7f,1f));
-                else Instantiate(cop, new Vector3(-5f,-5f,50f), new Quaternion(120f,180f,-7f,1f));
+                if(carsPerSong[0].Item1 == "cop") Instantiate(cop, this.transform);
+                else Instantiate(car, this.transform);
+                fpsCounter++;
             } else if (fpsCounter == carsPerSong[0].Item2){
                 carsPerSong.RemoveAt(0);
                 fpsCounter = 0;

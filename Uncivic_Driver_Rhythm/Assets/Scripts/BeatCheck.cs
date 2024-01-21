@@ -92,11 +92,10 @@ public class BeatCheck : MonoBehaviour
             }
 
             if(hit_block!=hit.transform){
-                Debug.Log(this.framecount);
                 this.checking=false;
                 this.framecount=0;
                 gameManager.score += points; 
-                Destroy(this);
+                Destroy(this.gameObject);
             }
             
         }

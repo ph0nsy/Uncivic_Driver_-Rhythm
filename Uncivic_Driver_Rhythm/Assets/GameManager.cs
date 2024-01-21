@@ -12,6 +12,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject playerLights;
     Light largas;
+    [SerializeField]
+    public GameObject spawner;
+    [SerializeField]
+    public GameObject startScreen;
+    [SerializeField]
+    public GameObject endScreen;
+    bool startedGame = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +29,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float input = Input.GetAxis("Horizontal");
         if(input < 0)
             flip.enabled = true;
@@ -31,6 +39,26 @@ public class GameManager : MonoBehaviour
             largas.enabled = false;
             flip.enabled = false;
         }
-            
+
+        if(spawner.activeSelf && spawner.transform.childCount > 0 && !startedGame) startedGame = true;
+
+        if(spawner.activeSelf && spawner.transform.childCount <= 0){
+            if(startedGame){
+                spawner.SetActive(false);
+                startScreen.SetActive(false);
+                endScreen.SetActive(true);
+                startedGame = false;
+            }
+        }
+    }
+
+    public void UpdatePlay(){
+        spawner.SetActive(true);
+        startScreen.SetActive(false);
+    }
+
+    public void RestartPlay(){
+        spawner.SetActive(true);
+        endScreen.SetActive(false);
     }
 }
