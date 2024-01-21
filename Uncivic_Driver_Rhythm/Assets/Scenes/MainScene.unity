@@ -495,6 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389a24ade75e4944c9713ab598de78c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delta: 1
+  deltaAugment: 3
   CAR_SIZE: 5
   worldSphere: {fileID: 496786640}
 --- !u!114 &339939978
@@ -849,7 +851,7 @@ Transform:
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!54 &706585440
 Rigidbody:
@@ -1265,7 +1267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1865169977
 MonoBehaviour:
@@ -1280,6 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 0}
+  cop: {fileID: 0}
   textFile: {fileID: 0}
 --- !u!1 &1915349030
 GameObject:
