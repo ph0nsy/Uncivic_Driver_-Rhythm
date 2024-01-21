@@ -5,6 +5,8 @@ using UnityEngine;
 public class CarMove : MonoBehaviour
 {
 
+
+    public int delta=1;
     Vector3 mov;
     float t = 0;
 
@@ -17,6 +19,7 @@ public class CarMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Hello world");   
         mov = this.GetComponent<Transform>().position;
         sphereCoords = this.worldSphere.GetComponent<Transform>().position;
         
@@ -30,15 +33,20 @@ public class CarMove : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {   
-        
         int R = 50;
-        t+=Time.deltaTime;
         
-        mov =     Vector3.forward *(sphereCoords.z-CAR_SIZE/2  + (R*Mathf.Cos(t)))
-                + Vector3.up * (sphereCoords.y+CAR_SIZE/2 + (R*Mathf.Sin(t)))
-                + Vector3.right * (mov.x);
+        
+        if(this.gameObject.GetComponent<BeatCheck>().checking 
+        && Input.GetAxis("Horizontal")!=0){
+            Debug.Log("AAAAAAAAAAAAAA");
+            delta=5;
+        } 
 
+        t+=Time.deltaTime;
+
+        mov =     Vector3.forward *(sphereCoords.z-CAR_SIZE/2  + (R*Mathf.Cos(delta*t)))
+                + Vector3.up * (sphereCoords.y+CAR_SIZE/2 + (R*Mathf.Sin(delta*t)))
+                + Vector3.right * (mov.x);
         this.transform.position=mov;
-        
     }
 }
