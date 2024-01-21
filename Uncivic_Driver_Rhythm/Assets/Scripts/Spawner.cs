@@ -23,22 +23,24 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(carsPerSong.Count > 0) return;
-        if(fpsCounter == 0){
-            if(carsPerSong[0].Item1 == "cop") Instantiate(car, new Vector3(5f,46.2f,-23.6f), new Quaternion(-35f,0f,0f,1f));
-            else Instantiate(cop, new Vector3(5f,46.2f,-23.6f), new Quaternion(-35f,0f,0f,1f));
-        } else if (fpsCounter == carsPerSong[0].Item2){
-            carsPerSong.RemoveAt(0);
-            fpsCounter = 0;
-        } else fpsCounter++;
+        if(carsPerSong.Count > 0){
+            if(fpsCounter == 0){
+                if(carsPerSong[0].Item1 == "cop") Instantiate(car, new Vector3(-5f,-5f,50f), new Quaternion(120f,180f,-7f,1f));
+                else Instantiate(cop, new Vector3(-5f,-5f,50f), new Quaternion(120f,180f,-7f,1f));
+            } else if (fpsCounter == carsPerSong[0].Item2){
+                carsPerSong.RemoveAt(0);
+                fpsCounter = 0;
+            } else fpsCounter++;
+        }
     }
 
     void textToMap(string text){
-        char[] separators = { ';', '\n' };
+        char[] separators = { ',', '\n' };
         string[] songSeed = text.Split(separators);
         int iter = 0;
         string current = songSeed[iter];
         while(current != "-"){
+            Debug.Log(songSeed[iter] + " " + songSeed[iter+1]);
             carsPerSong.Add(new Tuple<string, int>(current, Int32.Parse(songSeed[iter+1])));
             iter+=2;
             current = songSeed[iter];

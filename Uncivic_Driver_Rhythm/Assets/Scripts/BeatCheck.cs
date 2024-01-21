@@ -20,10 +20,12 @@ public class BeatCheck : MonoBehaviour
     public bool isFlip = false;
     public int points;
 
-    public GameObject finalScore;
-    public GameObject textScreen;
+    //public GameObject textScreen;
 
     private Transform hit_block=null;
+
+    GameManager gameManager;
+    Image accuracy;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,8 @@ public class BeatCheck : MonoBehaviour
         this.framecount=0;
         this.checking=false;
         this.points=0;
+        gameManager = GameObject.Find("Canvas").GetComponent<GameManager>();
+        accuracy = GameObject.Find("Canvas/Accuracy").GetComponent<Image>();
         //textScreen = finalScore.transform.GetChild(2).gameObject;
     }
 
@@ -79,18 +83,21 @@ public class BeatCheck : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, Mathf.Infinity, layerMask))
         {
-                if(hit_block==null || hit_block==hit.transform){
-                    hit_block = hit.transform;       
-                    // Debug.Log("---------------------------------------------------------------");
-                    this.checking=true;
-                    this.framecount=0;
-                }
+            Debug.Log(hit.transform);
+            if(hit_block==null || hit_block==hit.transform){
+                hit_block = hit.transform;       
+                // Debug.Log("---------------------------------------------------------------");
+                this.checking=true;
+                this.framecount=0;
+            }
 
-                if(hit_block!=hit.transform){
-                    // Debug.Log(this.framecount);
-                    this.checking=false;
-                    this.framecount=0;
-                }
+            if(hit_block!=hit.transform){
+                Debug.Log(this.framecount);
+                this.checking=false;
+                this.framecount=0;
+                gameManager.score += points; 
+                Destroy(this);
+            }
             
         }
     }
